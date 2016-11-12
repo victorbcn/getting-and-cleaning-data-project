@@ -2,8 +2,6 @@
 ## Coursera: Getting and Cleaning Data Course Project
 ##
 
-
-
 ## This function sets the working environment up by downloading the required
 ## files installing the the necessary libraries and getting in the correct
 ## working directory.
@@ -12,6 +10,14 @@ dataLocation <- "./UCI HAR Dataset"
 
 setup_project<-function() {
     
+    
+    # Check Project Requirements
+    requiredPackages = c('dplyr')
+    for(p in requiredPackages){
+      if(!require(p,character.only = TRUE)) install.packages(p)
+      library(p,character.only = TRUE)
+    }
+
    dataurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
    destination <- "data.zip"
    
@@ -25,7 +31,7 @@ setup_project<-function() {
        unzip(destination, overwrite = TRUE)
    } 
    
-   print("Files ready. You can now continue with the process.")
+   print("Files ready. You can now continue with the process by executing the function run_analysis()")
 }
 
 
