@@ -1,6 +1,11 @@
 ## 
 ## Coursera: Getting and Cleaning Data Course Project
 ##
+## Instructions:
+## 1. Source the source code file by using source("run_analysis.r")
+## 2. Run the project setup to prepare files and required libraries with: setup_project()
+## 3. Run the analysis function: run_analysis()
+
 
 ## This function sets the working environment up by downloading the required
 ## files installing the the necessary libraries and getting in the correct
@@ -23,10 +28,8 @@ setup_project<-function() {
    
    if (!file.exists(destination)) {
         download.file(dataurl, destination, method = "curl")
-   } else {
-    
    }
- 
+   
    if(!dir.exists(dataLocation)) {
        unzip(destination, overwrite = TRUE)
    } 
@@ -36,12 +39,12 @@ setup_project<-function() {
 
 
 ## This function performs the merging and analysis on the downloaded data and
-## outputs the final data frame to a csv file.
+## outputs the final data frame to a txt file.
 
 run_analysis <- function() {
     
     if(!dir.exists(dataLocation)) {
-        print ("Error: Data Directory not found")
+        print ("Error: Data Directory not found. Please run setup_project() first.")
         stop()
     }
     
@@ -86,6 +89,7 @@ run_analysis <- function() {
     XData <- summarise_each(XData, funs(mean))
     
     write.table(XData, file = "output.txt", row.name=FALSE)
+    XData
 }
 
 ## Renaming function using regular expressions.
